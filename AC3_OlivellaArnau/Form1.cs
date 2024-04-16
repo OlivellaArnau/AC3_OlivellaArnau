@@ -50,6 +50,7 @@ namespace AC3_OlivellaArnau
         }
         private void btSave_Click(object sender, EventArgs e)
         {
+            ValidateTextBoxes();
             Dictionary<int, string> components = Helper.ComponentGenerator();
             int CodiComarca = components.FirstOrDefault(x => x.Value == cBComponent.Text).Key;
             Helper.AddToCSV(new Consum
@@ -80,6 +81,11 @@ namespace AC3_OlivellaArnau
             tBActivitat.Text = string.Empty;
             tBConsumDPC.Text = string.Empty;
             tBTotal.Text = string.Empty;
+            if (dgConsum.SelectedRows.Count > 0)
+            {
+                DataGridViewRow selectedRow = dgConsum.SelectedRows[0];
+
+            }
         }
         private List<string> GenerateAnyComboBox()
         {
@@ -99,9 +105,59 @@ namespace AC3_OlivellaArnau
 
         }
 
-        private void dgConsum_SizeChanged(object sender, EventArgs e)
+        private void dgConsum_SelectionChanged(object sender, EventArgs e)
         {
+            if (dgConsum.SelectedRows.Count > 0)
+            {
+                Consum consum = dgConsum.CurrentRow.DataBoundItem as Consum;
+                lbPoblacio2.Text = Helper.PoblacioMida(consum.Poblacio);
+                lbCDMitja2.Text = Helper.ConsumDM(consum.ConsumDomesticPC, consum.Poblacio);
+                lbCDPCalt2.Text = Helper.ConsumDPCMax(Helper.CSVReader(), consum.ConsumDomesticPC);
+                lbCDPCbaix2.Text = Helper.ConsumDPCMin(Helper.CSVReader(), consum.ConsumDomesticPC);
+            }
+        }
+        private void ValidateTextBoxes()
+        {
+            if (string.IsNullOrEmpty(cBAny.Text) || string.IsNullOrEmpty(cBComponent.Text) || string.IsNullOrEmpty(tBPoblacio.Text) || string.IsNullOrEmpty(tBXarxa.Text) || string.IsNullOrEmpty(tBActivitat.Text) || string.IsNullOrEmpty(tBTotal.Text) || string.IsNullOrEmpty(tBConsumDPC.Text))
+            {
+                errorProvider1.SetError(btSave, "Please fill all the fields");
+                btSave.Enabled = false;
+            }
+            else if (!int.TryParse(tBPoblacio.Text, out int poblacio) || !int.TryParse(tBXarxa.Text, out int xarxa) || !int.TryParse(tBActivitat.Text, out int activitat) || !int.TryParse(tBTotal.Text, out int total) || !float.TryParse(tBConsumDPC.Text, out float consum))
+            {
+                errorProvider1.SetError(btSave, "Please fill all the fields with numbers");
+                btSave.Enabled = false;
+            }
+            else
+            {
+                errorProvider1.Clear();
+                btSave.Enabled = true;
+            }
+        }
 
+        private void tBPoblacio_TextChanged(object sender, EventArgs e)
+        {
+            ValidateTextBoxes();
+        }
+
+        private void tBXarxa_TextChanged(object sender, EventArgs e)
+        {
+            ValidateTextBoxes();
+        }
+
+        private void tBActivitat_TextChanged(object sender, EventArgs e)
+        {
+            ValidateTextBoxes();
+        }
+
+        private void tBConsumDPC_TextChanged(object sender, EventArgs e)
+        {
+            ValidateTextBoxes();
+        }
+
+        private void tBTotal_TextChanged(object sender, EventArgs e)
+        {
+            ValidateTextBoxes();
         }
     }
 }

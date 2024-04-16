@@ -94,6 +94,7 @@
             tBTotal.Name = "tBTotal";
             tBTotal.Size = new Size(92, 23);
             tBTotal.TabIndex = 6;
+            tBTotal.TextChanged += tBTotal_TextChanged;
             // 
             // tBConsumDPC
             // 
@@ -101,6 +102,7 @@
             tBConsumDPC.Name = "tBConsumDPC";
             tBConsumDPC.Size = new Size(92, 23);
             tBConsumDPC.TabIndex = 5;
+            tBConsumDPC.TextChanged += tBConsumDPC_TextChanged;
             // 
             // tBActivitat
             // 
@@ -108,6 +110,7 @@
             tBActivitat.Name = "tBActivitat";
             tBActivitat.Size = new Size(138, 23);
             tBActivitat.TabIndex = 4;
+            tBActivitat.TextChanged += tBActivitat_TextChanged;
             // 
             // tBXarxa
             // 
@@ -115,6 +118,7 @@
             tBXarxa.Name = "tBXarxa";
             tBXarxa.Size = new Size(92, 23);
             tBXarxa.TabIndex = 3;
+            tBXarxa.TextChanged += tBXarxa_TextChanged;
             // 
             // lbTotal
             // 
@@ -162,6 +166,7 @@
             tBPoblacio.Name = "tBPoblacio";
             tBPoblacio.Size = new Size(150, 23);
             tBPoblacio.TabIndex = 2;
+            tBPoblacio.TextChanged += tBPoblacio_TextChanged;
             // 
             // cBComponent
             // 
@@ -334,7 +339,7 @@
             dgConsum.Size = new Size(844, 150);
             dgConsum.TabIndex = 7;
             dgConsum.CellContentClick += dataGridView1_CellContentClick;
-            dgConsum.SizeChanged += dgConsum_SizeChanged;
+            dgConsum.SelectionChanged += dgConsum_SelectionChanged;
             // 
             // errorProvider1
             // 
