@@ -39,7 +39,7 @@
             lbActivitats = new Label();
             lbXarxa = new Label();
             tBPoblacio = new TextBox();
-            comboBox1 = new ComboBox();
+            cBComponent = new ComboBox();
             cBAny = new ComboBox();
             lbPoblació = new Label();
             lBComponent = new Label();
@@ -57,10 +57,12 @@
             bTClean = new Button();
             dgConsum = new DataGridView();
             consumBindingSource = new BindingSource(components);
+            errorProvider1 = new ErrorProvider(components);
             gBGestio.SuspendLayout();
             gBStats.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgConsum).BeginInit();
             ((System.ComponentModel.ISupportInitialize)consumBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // gBGestio
@@ -74,7 +76,7 @@
             gBGestio.Controls.Add(lbActivitats);
             gBGestio.Controls.Add(lbXarxa);
             gBGestio.Controls.Add(tBPoblacio);
-            gBGestio.Controls.Add(comboBox1);
+            gBGestio.Controls.Add(cBComponent);
             gBGestio.Controls.Add(cBAny);
             gBGestio.Controls.Add(lbPoblació);
             gBGestio.Controls.Add(lBComponent);
@@ -161,13 +163,14 @@
             tBPoblacio.Size = new Size(150, 23);
             tBPoblacio.TabIndex = 2;
             // 
-            // comboBox1
+            // cBComponent
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(135, 50);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(139, 23);
-            comboBox1.TabIndex = 1;
+            cBComponent.FormattingEnabled = true;
+            cBComponent.Location = new Point(135, 50);
+            cBComponent.Name = "cBComponent";
+            cBComponent.Size = new Size(139, 23);
+            cBComponent.TabIndex = 1;
+            cBComponent.SelectedIndexChanged += cBComponent_SelectedIndexChanged;
             // 
             // cBAny
             // 
@@ -301,6 +304,7 @@
             lbPoblacio.Size = new Size(132, 28);
             lbPoblacio.TabIndex = 14;
             lbPoblacio.Text = "Població > 20000 hab.:";
+            lbPoblacio.Click += lbPoblacio_Click;
             // 
             // btSave
             // 
@@ -320,6 +324,7 @@
             bTClean.TabIndex = 5;
             bTClean.Text = "Natejar";
             bTClean.UseVisualStyleBackColor = true;
+            bTClean.Click += bTClean_Click;
             // 
             // dgConsum
             // 
@@ -329,10 +334,11 @@
             dgConsum.Size = new Size(844, 150);
             dgConsum.TabIndex = 7;
             dgConsum.CellContentClick += dataGridView1_CellContentClick;
+            dgConsum.SizeChanged += dgConsum_SizeChanged;
             // 
-            // consumBindingSource
+            // errorProvider1
             // 
-            consumBindingSource.DataSource = typeof(Model.Consum);
+            errorProvider1.ContainerControl = this;
             // 
             // Form1
             // 
@@ -351,6 +357,7 @@
             gBStats.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgConsum).EndInit();
             ((System.ComponentModel.ISupportInitialize)consumBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
         }
 
@@ -364,7 +371,7 @@
         private Label lBAny;
         private Label lbXarxa;
         private TextBox tBPoblacio;
-        private ComboBox comboBox1;
+        private ComboBox cBComponent;
         private ComboBox cBAny;
         private Label lbActivitats;
         private Label lbTotal;
@@ -385,5 +392,6 @@
         private Button bTClean;
         private DataGridView dgConsum;
         private BindingSource consumBindingSource;
+        private ErrorProvider errorProvider1;
     }
 }
